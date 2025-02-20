@@ -75,7 +75,7 @@ public class EmployeeController {
     public ResponseEntity<ApiResponse> updateEmployee(@Valid @RequestBody EmployeeUpdateDto dto ,@RequestParam(required = true) String empId) {
        try {
          
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true,"Success",employeeService.updateEmployee(dto,empId)));
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true,"Success",employeeService.updateEmployee(dto,empId)));
         } 
         catch(NotFoundException e){
             return  ResponseEntity.badRequest().body(new ApiResponse(false,"Failed",e.getMessage())) ;
