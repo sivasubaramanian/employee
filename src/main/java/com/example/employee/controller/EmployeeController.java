@@ -33,7 +33,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createEmployee(@Valid @RequestBody EmployeeDto dto) {
+    public ResponseEntity<ApiResponse> createEmployee(@Valid @RequestBody EmployeeDto dto) {
        try {
         
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true,"Success",employeeService.createEmployee(dto)));
@@ -46,7 +46,7 @@ public class EmployeeController {
         }
     }
     @GetMapping("/get-employee-id")
-    public ResponseEntity<Object> getEmployeeById( @RequestParam(required = true) String empId) {
+    public ResponseEntity<ApiResponse> getEmployeeById( @RequestParam(required = true) String empId) {
        try {
         
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true,"Success",employeeService.getByEmployeeId(empId)));
@@ -59,7 +59,7 @@ public class EmployeeController {
         }
     }
     @GetMapping("/get-employee-all")
-    public ResponseEntity<Object> getEmployeeAll(@RequestParam(required = false) String search,
+    public ResponseEntity<ApiResponse> getEmployeeAll(@RequestParam(required = false) String search,
                                     @RequestParam(defaultValue = "0")int page,
                                     @RequestParam(defaultValue = "10")int size) {
        try {
@@ -72,7 +72,7 @@ public class EmployeeController {
         }
     }
     @PutMapping("/update")
-    public Object updateEmployee(@Valid @RequestBody EmployeeUpdateDto dto ,@RequestParam(required = true) String empId) {
+    public ResponseEntity<ApiResponse> updateEmployee(@Valid @RequestBody EmployeeUpdateDto dto ,@RequestParam(required = true) String empId) {
        try {
          
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse(true,"Success",employeeService.updateEmployee(dto,empId)));
@@ -87,7 +87,7 @@ public class EmployeeController {
 
 
     @DeleteMapping("/delete")
-    public Object deleteEmployee(@RequestParam(required = true) String empId) {
+    public ResponseEntity<ApiResponse> deleteEmployee(@RequestParam(required = true) String empId) {
        try {
         
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true,"Success",employeeService.deleteEmployee(empId)));
